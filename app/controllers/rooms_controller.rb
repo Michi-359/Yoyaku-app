@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params)
+    @room = Room.new(params.require(:room).permit(:room_name,:room_content,:room_price,:room_address))
     @user = current_user
     if @room.save
       flash[:notice_create] = "施設情報を登録しました"
@@ -48,6 +48,6 @@ class RoomsController < ApplicationController
 
   private
   def room_params  # プライベートメソッド 
-    params.require(:room).permit(:room_name, :room_content, :room_price, :room_address, :user_id)
+    params.require(:room).permit(:room_name, :room_content, :room_price, :room_address,)
   end
 end

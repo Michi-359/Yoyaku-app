@@ -19,6 +19,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  class RegistrationsController < Devise::RegistrationsController
+
+    protected
+    def update_resource(resource, params)
+      resource.update_without_password(params)
+    end
+  end
+
   # PUT /resource
   # def update
   #   super

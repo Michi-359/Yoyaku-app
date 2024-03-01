@@ -22,7 +22,6 @@
       <td><%= f.text_field :room_address %></td>
     </tr>
   </table>
-   <%= f.hidden_field :user_id, value: current_user.id %>
  <% if flash[:notice_no_create] %>
    <p class="notice"><%= flash[:notice_no_create] %></p>
  <% end %>
