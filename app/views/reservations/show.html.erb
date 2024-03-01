@@ -1,0 +1,22 @@
+<%= render "shared/partial" %>
+<%= link_to '戻る', :back %>
+<%= link_to "編集", edit_reservation_path(@reservation.id) %>
+<%= form_with model: @reservation do |f| %>
+<table>
+    <tr>
+      <th><%= f.label :checkin ,"チェックイン" %></th>
+      <td><%= @reservation.checkin %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :checkin ,"チェックアウト" %></th>
+      <td><%= @reservation.checkout %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :person ,"人数" %></th>
+      <td><%= @reservation.person %></td>
+    </tr>
+  </table>
+
+<% end %>

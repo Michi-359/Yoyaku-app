@@ -1,0 +1,34 @@
+<%= render "shared/partial" %>
+
+<h3>予約の編集</h3>
+
+<%= form_with model: @reservation do |f| %>
+<table>
+    <tr>
+      <th><%= f.label :checkin ,"チェックイン" %></th>
+      <td><%= f.date_field :checkin %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :checkout ,"チェックアウト" %></th>
+      <td><%= f.date_field :checkout %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :person ,"人数" %></th>
+      <td><%= f.text_field :person %></td>
+    </tr>
+  </table>
+
+  <div>
+    <ul>
+      <li><%= f.submit "編集を完了する"%></li>
+      <li><%= link_to "キャンセル", :reservations %></li>
+    </ul>
+  </div>
+
+ <% if flash[:notice_no_update] %>
+   <p class="notice"><%= flash[:notice_no_update] %></p>
+ <% end %>
+ <%= render "shared/error", obj: @reservation %> 
+<% end %>

@@ -1,0 +1,48 @@
+<div style="display: flex;justify-content: space-between">
+<h3>予約済み一覧</h3>
+</div>
+
+<div>
+<table>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>合計料金</th>
+      <th>チェックイン</th>
+      <th>チェックアウト</th>
+      <th>予約確定日時</th>
+      <th>編集</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |f| %>
+      <tr>
+        <td>画像</td>
+        <td><%= "施設名" %></td>
+        <td><%= "紹介文" %></td>
+        <td><%= "合計料金" %></td>
+        <td><%= f.checkin %></td>
+        <td><%= f.checkout %></td>
+        <td><%= l f.updated_at, format: :time %></td>
+        <td><%= link_to "編集", [:edit, f] %></td>
+        <td><%= link_to "削除", f, method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+ <% if flash[:notice_create] %>
+   <p class="notice"><%= flash[:notice_create] %></p>
+ <% end %>
+ <% if flash[:notice_update] %>
+   <p class="notice"><%= flash[:notice_update] %></p>
+ <% end %>
+ <% if flash[:notice_destroy] %>
+   <p class="notice"><%= flash[:notice_destroy] %></p>
+ <% end %>
+
+</div>

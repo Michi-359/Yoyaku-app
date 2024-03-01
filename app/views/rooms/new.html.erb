@@ -1,0 +1,38 @@
+<h3>施設の新規追加</h3>
+
+<%= form_with model: @room do |f| %>
+  <table>
+    <tr>
+      <th><%= f.label :room_name ,"施設名" %></th>
+      <td><%= f.text_field :room_name %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :room_content ,"施設詳細" %></th>
+      <td><%= f.text_field :room_content %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :room_price ,"料金" %></th>
+      <td><%= f.text_field :room_price %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :room_address ,"住所" %></th>
+      <td><%= f.text_field :room_address %></td>
+    </tr>
+  </table>
+   <%= f.hidden_field :user_id, value: current_user.id %>
+ <% if flash[:notice_no_create] %>
+   <p class="notice"><%= flash[:notice_no_create] %></p>
+ <% end %>
+
+  <div>
+    <ul>
+      <li><%= f.submit "保存"%></li>
+      <li><%= link_to "キャンセル", :rooms %></li>
+    </ul>
+  </div>
+
+  <%= render "shared/error", obj: @room %> 
+<% end %>

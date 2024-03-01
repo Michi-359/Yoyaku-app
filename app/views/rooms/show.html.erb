@@ -1,0 +1,27 @@
+<%= render "shared/partial" %>
+<%= link_to '戻る', :back %>
+<%= link_to "編集", edit_room_path(@room.id) %>
+<%= form_with model: @room do |f| %>
+<table>
+    <tr>
+      <th><%= f.label :room_name ,"施設名" %></th>
+      <td><%= @room.room_name %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :room_content ,"施設詳細" %></th>
+      <td><%= @room.room_content %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :room_price ,"料金" %></th>
+      <td><%= @room.room_price %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :room_address ,"住所" %></th>
+      <td><%= @room.room_address %></td>
+    </tr>
+  </table>
+
+<% end %>
