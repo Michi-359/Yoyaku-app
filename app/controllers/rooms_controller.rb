@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   def index
     @rooms = Room.all
+    @user = current_user
   end
 
   def new
@@ -9,12 +10,15 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(params.require(:room).permit(:room_name,:room_content,:room_price,:room_address))
+    @room = Room.new(room_params)
     @user = current_user
+    binding.pry
     if @room.save
+      binding.pry
       flash[:notice_create] = "施設情報を登録しました"
       redirect_to :rooms
     else
+      binding.pry
       flash[:notice_no_create] = "施設情報の登録に失敗しました"
       render "new"
     end
@@ -22,6 +26,7 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
+    @user = current_user
   end
 
   def edit
@@ -48,6 +53,6 @@ class RoomsController < ApplicationController
 
   private
   def room_params  # プライベートメソッド 
-    params.require(:room).permit(:room_name, :room_content, :room_price, :room_address,)
+    params.require(:room).permit(:room_name, :room_content, :room_price, :room_address, :user_id, :room_id)
   end
 end
