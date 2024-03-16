@@ -12,6 +12,7 @@
       <th>施設名</th>
       <th>紹介文</th>
       <th>料金</th>
+      <th>住所</th>
       <th>作成日</th>
       <th>編集</th>
       <th>削除</th>
@@ -22,14 +23,14 @@
     <% @rooms.each do |room| %>
       <tr>
         <td>画像</td>
-        <td><%= link_to "#{room.room_name}", room %></td>
+        <td><%= room.room_name %></td>
         <td><%= room.room_content %></td>
         <td><%= room.room_price %></td>
+        <td><%= room.room_address %></td>
         <td><%= l room.updated_at %></td>
         <td><%= link_to "編集", [:edit, room] %></td>
         <td><%= link_to "削除", room, method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
       </tr>
-      <%= f.hidden_field :user_id, value: @user.id %>
     <% end %>
   </tbody>
 </table>

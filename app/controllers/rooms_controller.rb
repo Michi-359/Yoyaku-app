@@ -12,13 +12,10 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     @user = current_user
-    binding.pry
     if @room.save
-      binding.pry
       flash[:notice_create] = "施設情報を登録しました"
       redirect_to :rooms
     else
-      binding.pry
       flash[:notice_no_create] = "施設情報の登録に失敗しました"
       render "new"
     end
