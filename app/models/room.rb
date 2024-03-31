@@ -5,4 +5,9 @@ class Room < ApplicationRecord
     validates :room_address, presence: true
     belongs_to :user
     has_many :reservations
+
+    def self.search(search)
+        return Room.all unless search
+        Room.where(['room_address LIKE ?', "%#{search}%"])
+      end
 end

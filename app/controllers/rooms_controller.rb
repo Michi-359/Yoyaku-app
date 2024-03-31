@@ -28,6 +28,7 @@ class RoomsController < ApplicationController
 
   def edit
     @room = Room.find(params[:id])
+    @user = current_user
   end
 
   def update

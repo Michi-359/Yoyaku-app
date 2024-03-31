@@ -7,8 +7,8 @@
 <%= form_with model: @users do |f| %>
 <table>
     <tr>
-      <th><%= f.label :name ,"アイコン画像" %></th>
-      <td><%= f.text_field :name %></td>
+      <th><%= f.label :avater ,"アイコン画像" %></th>
+      <td><%= f.file_field :avater %></td>
     </tr>
 
     <tr>
