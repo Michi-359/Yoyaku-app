@@ -5,7 +5,7 @@
 
 <h1>プロフィール編集</h1>
 
-<%= form_with model: @users do |f| %>
+<%= form_with model: @user, url: user_registration_path, local: true do |f| %>
 <table>
     <tr>
       <th><%= f.label :avater ,"アイコン画像" %></th>
