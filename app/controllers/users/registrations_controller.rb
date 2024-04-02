@@ -19,12 +19,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  class RegistrationsController < Devise::RegistrationsController
-
     protected
-    def update_resource(resource, params)
-      resource.update_without_password(params)
+    
+    def after_update_path_for(resource)
+      profile_path(current_user.id)
     end
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
   end
 
   # PUT /resource
