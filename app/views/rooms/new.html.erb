@@ -22,6 +22,12 @@
       <th><%= f.label :room_address ,"住所" %></th>
       <td><%= f.text_field :room_address %></td>
     </tr>
+
+    <tr>
+      <th><%= f.label :room_image ,"施設画像"  %></th>
+      <td><%= f.file_field :room_image %></td>
+    </tr>
+    
     <%= f.hidden_field :user_id, value: @user.id %>
   </table>
  <% if flash[:notice_no_create] %>

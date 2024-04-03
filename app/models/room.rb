@@ -6,6 +6,8 @@ class Room < ApplicationRecord
     belongs_to :user
     has_many :reservations
   
+    mount_uploader :room_image, RoomImageUploader
+
     def self.search(search)
         return Room.all unless search
         Room.where(['room_address LIKE ?', "%#{search}%"])

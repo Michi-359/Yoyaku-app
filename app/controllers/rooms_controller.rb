@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   def index
-    @rooms = Room.all
+    @rooms = Room.where(user_id:current_user.id)
     @user = current_user
   end
 
@@ -51,6 +51,6 @@ class RoomsController < ApplicationController
 
   private
   def room_params  # プライベートメソッド 
-    params.require(:room).permit(:room_name, :room_content, :room_price, :room_address, :user_id, :room_id, :room_image)
+    params.require(:room).permit(:room_name, :room_content, :room_price, :room_address, :room_image, :user_id, :room_id)
   end
 end

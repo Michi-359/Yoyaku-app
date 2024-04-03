@@ -1,7 +1,6 @@
 <div style="display: flex;justify-content: space-between">
 <%= render "shared/partial" %>
 <h3>登録済み一覧</h3>
-<p><%= link_to "施設の新規登録", :new_room %></p>
 </div>
 
 <div>
@@ -22,8 +21,14 @@
   <tbody>
     <% @rooms.each do |room| %>
       <tr>
-        <td>画像</td>
-        <td><%= room.room_name %></td>
+        <td>
+         <% if room.room_image? %>
+          <img src=<%= room.room_image %> class = "room_image">
+         <% else %>
+          <img src="/default-room_image-icon.png" class = "room_image">
+         <% end %>
+        </td>
+        <td><%= link_to "#{room.room_name}", room %></td>
         <td><%= room.room_content %></td>
         <td><%= room.room_price %></td>
         <td><%= room.room_address %></td>

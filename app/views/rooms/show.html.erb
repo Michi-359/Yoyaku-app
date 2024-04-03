@@ -2,26 +2,32 @@
 <%= link_to '戻る', :back %>
 <%= link_to "編集", edit_room_path(@room.id) %>
 <%= form_with model: @room do |f| %>
+  <% if @room.room_image.present? %>
+      <img src=<%= @room.room_image %> class = "room_image">
+  <% else %>
+      <img src="/default-room_image-icon.png" class = "room_image">
+  <% end %>
+
 <table>
-    <tr>
-      <th><%= f.label :room_name ,"施設名" %></th>
-      <td><%= @room.room_name %></td>
-    </tr>
+  <tr>
+    <th><%= f.label :room_name ,"施設名" %></th>
+    <td><%= @room.room_name %></td>
+  </tr>
 
-    <tr>
-      <th><%= f.label :room_content ,"施設詳細" %></th>
-      <td><%= @room.room_content %></td>
-    </tr>
+  <tr>
+    <th><%= f.label :room_content ,"施設詳細" %></th>
+    <td><%= @room.room_content %></td>
+  </tr>
 
-    <tr>
-      <th><%= f.label :room_price ,"料金" %></th>
-      <td><%= @room.room_price %></td>
-    </tr>
+  <tr>
+    <th><%= f.label :room_price ,"料金" %></th>
+    <td><%= @room.room_price %></td>
+  </tr>
 
-    <tr>
-      <th><%= f.label :room_address ,"住所" %></th>
-      <td><%= @room.room_address %></td>
-    </tr>
-  </table>
+  <tr>
+    <th><%= f.label :room_address ,"住所" %></th>
+    <td><%= @room.room_address %></td>
+  </tr>
+</table>
 
 <% end %>
