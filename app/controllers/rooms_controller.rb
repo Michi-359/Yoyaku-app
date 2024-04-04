@@ -24,11 +24,15 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     @user = current_user
+    @reservation = Reservation.new
   end
 
   def edit
     @room = Room.find(params[:id])
     @user = current_user
+    if @room.user_id != current_user.id
+      redirect_to root_path
+    end
   end
 
   def update

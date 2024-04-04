@@ -1,6 +1,10 @@
 <%= render "shared/partial" %>
 <%= link_to '戻る', :back %>
-<%= link_to "編集", edit_room_path(@room.id) %>
+<% if @room.user == current_user %>
+ <%= link_to "編集", edit_room_path(@room.id) %>
+<% else %>
+ <td></td>
+<% end %>
 <%= form_with model: @room do |f| %>
   <% if @room.room_image.present? %>
       <img src=<%= @room.room_image %> class = "room_image">
@@ -29,5 +33,7 @@
     <td><%= @room.room_address %></td>
   </tr>
 </table>
+
+<%= link_to "予約", reservations_path %>
 
 <% end %>
