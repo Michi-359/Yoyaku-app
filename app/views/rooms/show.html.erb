@@ -5,35 +5,58 @@
 <% else %>
  <td></td>
 <% end %>
-<%= form_with model: @room do |f| %>
+<table>
   <% if @room.room_image.present? %>
       <img src=<%= @room.room_image %> class = "room_image">
   <% else %>
       <img src="/default-room_image-icon.png" class = "room_image">
   <% end %>
 
-<table>
   <tr>
-    <th><%= f.label :room_name ,"施設名" %></th>
+    <th>名前</th>
     <td><%= @room.room_name %></td>
   </tr>
-
   <tr>
-    <th><%= f.label :room_content ,"施設詳細" %></th>
-    <td><%= @room.room_content %></td>
-  </tr>
-
-  <tr>
-    <th><%= f.label :room_price ,"料金" %></th>
+    <th>一人当たり料金</th>
     <td><%= @room.room_price %></td>
   </tr>
-
   <tr>
-    <th><%= f.label :room_address ,"住所" %></th>
+    <th>部屋詳細</th>
+    <td><%= @room.room_content %></td>
+  </tr>
+  <tr>
+    <th>住所</th>
     <td><%= @room.room_address %></td>
+  </tr>
+  <tr>
+    <th>価格</th>
+    <td><%= @room.room_price %></td>
   </tr>
 </table>
 
-<%= link_to "予約", reservations_path %>
+<h2>部屋を予約する</h2>
+  <%= form_with model: @reservation do |f| %>
+   <%= f.hidden_field :user_id, value: @user.id %>
+   <%= f.hidden_field :room_id, value: @room.id %>
+    <table>
+     <tr>
+       <th><%= f.label :checkin ,"開始日" %></th>
+       <td><%= f.date_field :checkin %></td>
+     </tr>
 
-<% end %>
+     <tr>
+       <th><%= f.label :checkout ,"終了日" %></th>
+       <td><%= f.date_field :checkout %></td>
+     </tr>
+
+     <tr>
+       <th><%= f.label :person ,"人数" %></th>
+       <td><%= f.text_field :person %></td>
+     </tr>
+   </table>
+   <div>
+   <ul>
+      <%= f.submit "予約する"%>
+   </ul>
+   </div>
+  <%end%>

@@ -17,6 +17,10 @@
       <th><%= f.label :person ,"人数" %></th>
       <td><%= f.text_field :person %></td>
     </tr>
+
+    <%= f.hidden_field :user_id, value: @user.id %>
+    <%= f.hidden_field :room_id, value: @room_id %>
+
   </table>
 
  <% if flash[:notice_no_create] %>

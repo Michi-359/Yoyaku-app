@@ -1,5 +1,5 @@
-<%= render "shared/partial" %>
 <div style="display: flex;justify-content: space-between">
+<%= render "shared/partial" %>
 <h3>予約済み一覧</h3>
 </div>
 
@@ -22,9 +22,15 @@
   <tbody>
     <% @reservations.each do |f| %>
       <tr>
-        <td>画像</td>
-        <td><%= "施設名" %></td>
-        <td><%= "紹介文" %></td>
+        <td>
+         <% if @rooms.find(f.room_id).room_image.present? %>
+          <img src=<%= @rooms.find(f.room_id).room_image %> class = "room_image">
+         <% else %>
+          <img src="/assets/default-room_image-icon.png" class = "room_image">
+         <% end %>
+        </td>
+        <td><%= link_to "#{@rooms.find(f.room_id).room_name}", @rooms.find(f.room_id) %></td>
+        <td><%= @rooms.find(f.room_id).room_content %></td>
         <td><%= "合計料金" %></td>
         <td><%= f.checkin %></td>
         <td><%= f.checkout %></td>

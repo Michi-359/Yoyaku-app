@@ -1,12 +1,12 @@
 class ReservationsController < ApplicationController
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.where(user_id:current_user.id)
     @rooms = Room.all
     @user = current_user
   end
 
   def new
-    @reservation = Reservation.new(reservation_params)
+    @reservation = Reservation.new
     @user = current_user
     @room = Room.new
   end
@@ -14,11 +14,14 @@ class ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(reservation_params)
     @user = current_user
-    @room = Room.new(room_params)
+    @room = Room.where(id: @reservation.room_id)
+    binding.pry
     if @reservation.save
+      binding.pry
       flash[:notice_create] = "予約情報を登録しました"
       redirect_to :reservations
     else
+      binding.pry
       flash[:notice_no_create] = "予約情報の登録に失敗しました"
       render "new"
     end
@@ -26,10 +29,13 @@ class ReservationsController < ApplicationController
 
   def show
     @reservation = Reservation.find(params[:id])
+    @user = current_user
   end
 
   def edit
     @reservation = Reservation.find(params[:id])
+    @user = current_user
+    @rooms = Room.all
   end
 
   def update
@@ -52,6 +58,6 @@ class ReservationsController < ApplicationController
 
   private
   def reservation_params  # プライベートメソッド 
-    params.require(:reservation).permit(:checkin, :checkout, :person)
+    params.require(:reservation).permit(:checkin, :checkout, :person, :user_id, :room_id)
   end
 end

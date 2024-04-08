@@ -37,6 +37,7 @@ class RoomsController < ApplicationController
 
   def update
     @room = Room.find(params[:id])
+    binding.pry
     if @room.update(room_params)
       flash[:notice_update] = "施設情報を更新しました"
       redirect_to :rooms

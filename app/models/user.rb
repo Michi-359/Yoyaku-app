@@ -21,6 +21,6 @@ class User < ApplicationRecord
     result
   end
   
-  has_many :users
+  has_many :rooms
   has_many :reservations
 end
