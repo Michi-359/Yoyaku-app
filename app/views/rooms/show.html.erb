@@ -34,29 +34,5 @@
   </tr>
 </table>
 
-<h2>部屋を予約する</h2>
-  <%= form_with model: @reservation do |f| %>
-   <%= f.hidden_field :user_id, value: @user.id %>
-   <%= f.hidden_field :room_id, value: @room.id %>
-    <table>
-     <tr>
-       <th><%= f.label :checkin ,"開始日" %></th>
-       <td><%= f.date_field :checkin %></td>
-     </tr>
+<%= render "shared/reservation" %>
 
-     <tr>
-       <th><%= f.label :checkout ,"終了日" %></th>
-       <td><%= f.date_field :checkout %></td>
-     </tr>
-
-     <tr>
-       <th><%= f.label :person ,"人数" %></th>
-       <td><%= f.text_field :person %></td>
-     </tr>
-   </table>
-   <div>
-   <ul>
-      <%= f.submit "予約する"%>
-   </ul>
-   </div>
-  <%end%>

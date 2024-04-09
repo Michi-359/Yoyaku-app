@@ -11,6 +11,14 @@ class ReservationsController < ApplicationController
     @room = Room.new
   end
 
+  def confirm
+    @reservation = Reservation.new(reservation_params)
+    @user = current_user
+    @room = Room.all
+    flash[:notice_no_create] = "バリデーションエラーがあります"
+    redirect_to controller: :rooms, action: :show, id: @reservation.room_id if @reservation.invalid?
+  end
+
   def create
     @reservation = Reservation.new(reservation_params)
     @user = current_user
@@ -23,7 +31,7 @@ class ReservationsController < ApplicationController
     else
       binding.pry
       flash[:notice_no_create] = "予約情報の登録に失敗しました"
-      render "new"
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -32,18 +40,30 @@ class ReservationsController < ApplicationController
     @user = current_user
   end
 
+  def edit_confirm
+    @reservation = Reservation.new(reservation_params)
+    @user = current_user
+    @room = Room.all
+    flash[:notice_no_create] = "バリデーションエラーがあります"
+    redirect_to controller: :rooms, action: :show, id: @reservation.room_id if @reservation.invalid?
+  end
+
   def edit
     @reservation = Reservation.find(params[:id])
     @user = current_user
-    @rooms = Room.all
+    @room = Room.where(id: @reservation.room_id)
   end
 
   def update
     @reservation = Reservation.find(params[:id])
+    @user = current_user
+    binding.pry
     if @reservation.update(reservation_params)
+      binding.pry
       flash[:notice_update] = "予約情報を更新しました"
       redirect_to :reservations
     else
+      binding.pry
       flash[:notice_no_update] = "予約情報を更新できませんでした"
       render "edit"
     end
@@ -58,6 +78,6 @@ class ReservationsController < ApplicationController
 
   private
   def reservation_params  # プライベートメソッド 
-    params.require(:reservation).permit(:checkin, :checkout, :person, :user_id, :room_id)
+    params.permit(:checkin, :checkout, :person, :user_id, :room_id)
   end
 end
