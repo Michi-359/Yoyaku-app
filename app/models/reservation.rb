@@ -1,7 +1,7 @@
 class Reservation < ApplicationRecord
     validates :checkin, presence: true
     validates :checkout, presence: true
-    validates :person, presence: true, numericality: {greater_than: 0, message: " : 1人以上の人数を入れてください"}
+    validates :person, presence: true, numericality: { greater_than_or_equal_to: 1 }
     validate :date_before_start
     validate :start_end_check
     belongs_to :user

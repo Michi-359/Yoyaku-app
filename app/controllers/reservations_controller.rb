@@ -14,9 +14,17 @@ class ReservationsController < ApplicationController
   def confirm
     @reservation = Reservation.new(reservation_params)
     @user = current_user
-    @room = Room.all
-    flash[:notice_no_create] = "バリデーションエラーがあります"
-    redirect_to controller: :rooms, action: :show, id: @reservation.room_id if @reservation.invalid?
+    @room = Room.where(id: @reservation.room_id)
+    binding.pry
+    if @reservation.invalid?
+      binding.pry
+      flash[:notice_no_create] = "バリデーションエラーがあります"
+      redirect_to controller: :rooms, action: :show, id: @reservation.room_id
+    else
+      binding.pry
+      @reservation.many_days = ( @reservation.checkout - @reservation.checkin )
+      @reservation.total_price = @reservation.room.room_price * @reservation.person * @reservation.many_days
+    end
   end
 
   def create
@@ -40,18 +48,26 @@ class ReservationsController < ApplicationController
     @user = current_user
   end
 
-  def edit_confirm
-    @reservation = Reservation.new(reservation_params)
-    @user = current_user
-    @room = Room.all
-    flash[:notice_no_create] = "バリデーションエラーがあります"
-    redirect_to controller: :rooms, action: :show, id: @reservation.room_id if @reservation.invalid?
-  end
-
   def edit
     @reservation = Reservation.find(params[:id])
     @user = current_user
     @room = Room.where(id: @reservation.room_id)
+    if @reservation.user_id != current_user.id
+      redirect_to root_path
+    end
+  end
+
+  def edit_confirm
+    @reservation = Reservation.new(reservation_params)
+    @user = current_user
+    @room = Room.where(id: @reservation.room_id)
+    if @reservation.invalid?
+      flash[:notice_no_create] = "バリデーションエラーがあります"
+      redirect_to controller: :rooms, action: :show, id: @reservation.room_id
+    else
+      @reservation.many_days = ( @reservation.checkout - @reservation.checkin )
+      @reservation.total_price = @reservation.room.room_price * @reservation.person * @reservation.many_days
+    end
   end
 
   def update
@@ -78,6 +94,6 @@ class ReservationsController < ApplicationController
 
   private
   def reservation_params  # プライベートメソッド 
-    params.permit(:checkin, :checkout, :person, :user_id, :room_id)
+    params.permit(:checkin, :checkout, :person, :room_price, :total_price, :user_id, :room_id)
   end
 end

@@ -2,13 +2,13 @@
 
 <h2>エリア名を入力</h2>
 <%= form_tag('/search', method: :get) do %>
-  <%= text_field_tag :search, nil, placeholder: 'エリア名を入力' %>
-  <%= submit_tag '検索', name: nil %>
+   <%= text_field_tag :search, nil, placeholder: 'エリア名を入力'  %>
+   <%= submit_tag 'Search', name: nil %>
 <% end %>
 
 <%= form_tag('/keyword_search', method: :get) do %>
-  <%= text_field_tag :keyword_search, nil, placeholder: 'キーワード名を入力' %>
-  <%= submit_tag 'キーワード検索', name: nil %>
+   <%= text_field_tag :keyword_search, nil, placeholder: 'キーワード名を入力' %>
+   <%= submit_tag 'キーワード検索', name: nil %>
 <% end %>
 
 <span><%= @rooms.count %>件見つかりました。</span>

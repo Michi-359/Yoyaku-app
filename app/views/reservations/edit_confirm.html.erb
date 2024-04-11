@@ -24,11 +24,24 @@
       <th><%= f.label :person ,"人数" %></th>
       <td><%= @reservation.person %>名</td>
     </tr>
+
+    <tr>
+      <th><%= f.label :many_days ,"宿泊日数" %></th>
+      <td><%= @reservation.many_days %>日</td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :total_price ,"合計金額" %></th>
+      <td>¥<%= @reservation.total_price %></td>
+    </tr>
+    
    </table>
 
    <%= f.hidden_field :checkin ,value: @reservation.checkin %>
    <%= f.hidden_field :checkout ,value: @reservation.checkout %>
    <%= f.hidden_field :person ,value: @reservation.person %>
+   <%= f.hidden_field :many_days ,value: @reservation.many_days %>
+   <%= f.hidden_field :total_price ,value: @reservation.total_price %>
    <%= f.hidden_field :user_id, value: @user.id %>
    <%= f.hidden_field :room_id, value: @reservation.room_id %>
 

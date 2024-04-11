@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  resources :rooms
-  
-  get "users/show" => "users#show"
   resources :profiles
-  get "/search", to: "searches#top"
-  root to: "searches#top"
+  get "users/show" => "users#show"
+  get "/search", to: "searches#search"
+  get "/keyword_search", to: "searches#keyword_search"
   get "/reservations/confirm", to: "reservations#confirm"
   get "/reservations/:id/edit_confirm", to: "reservations#edit_confirm"
+  root to: "searches#top"
+  resources :rooms
   resources :reservations, only: [:index, :new, :confirm, :create, :show, :edit, :destroy, :update] do
     collection do
       post :confirm
