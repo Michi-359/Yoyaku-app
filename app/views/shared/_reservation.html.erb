@@ -5,12 +5,12 @@
       <%= f.hidden_field :user_id, value: @user.id %>
       <%= f.hidden_field :room_id, value: @room.id %>
       <tr>
-        <th><%= f.label :checkin ,"開始日" %></th>
+        <th><%= f.label :checkin ,"チェックイン日" %></th>
         <td><%= f.date_field :checkin %></td>
       </tr>
 
       <tr>
-        <th><%= f.label :checkout ,"終了日" %></th>
+        <th><%= f.label :checkout ,"チェックアウト日" %></th>
         <td><%= f.date_field :checkout %></td>
       </tr>
 

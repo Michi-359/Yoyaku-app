@@ -11,23 +11,23 @@
 <%= form_with(url:reservation_path, method: :patch) do |f| %>
    <table>
     <tr>
-      <th><%= f.label :checkin ,"チェックイン" %></th>
+      <th><%= f.label :checkin ,"チェックイン日" %></th>
       <td><%= l @reservation.checkin %></td>
     </tr>
 
     <tr>
-      <th><%= f.label :checkin ,"チェックアウト" %></th>
+      <th><%= f.label :checkin ,"チェックアウト日" %></th>
       <td><%= l @reservation.checkout %></td>
-    </tr>
-
-    <tr>
-      <th><%= f.label :person ,"人数" %></th>
-      <td><%= @reservation.person %>名</td>
     </tr>
 
     <tr>
       <th><%= f.label :many_days ,"宿泊日数" %></th>
       <td><%= @reservation.many_days %>日</td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :person ,"人数" %></th>
+      <td><%= @reservation.person %>名</td>
     </tr>
 
     <tr>

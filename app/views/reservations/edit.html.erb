@@ -11,12 +11,12 @@
 <%= form_with(url:edit_confirm_reservation_path(@reservation), method: :get) do |f| %>
   <table>
     <tr>
-      <th><%= f.label :checkin ,"チェックイン" %></th>
+      <th><%= f.label :checkin ,"チェックイン日" %></th>
       <td><%= f.date_field :checkin, value: @reservation.checkin %></td>
     </tr>
 
     <tr>
-      <th><%= f.label :checkout ,"チェックアウト" %></th>
+      <th><%= f.label :checkout ,"チェックアウト日" %></th>
       <td><%= f.date_field :checkout, value: @reservation.checkout %></td>
     </tr>
 

@@ -1,20 +1,31 @@
 <div class="partial">
   <header>
-    <h4><%= link_to "Potepan Share", root_path %></h4>
     <% if user_signed_in? %>
-          <div>
-          <% if @user.avatar.present? %>
-            <img src=<%= @user.avatar %> class = "icon_image">
-          <% else %>
-            <img src="/assets/default-user-icon.png" class = "icon_image">
-          <% end %>
+    <h4><%= link_to "Potepan Share", root_path %></h4>
+      <div class="dropdown">
+        <ul class="menu-list">
+          <div class="menu-item">
+           <% if @user.avatar.present? %>
+             <img src=<%= @user.avatar %> class = "icon_image">
+           <% else %>
+             <img src="/assets/default-user-icon.png" class = "icon_image">
+           <% end %>
           </div>
-          <%= link_to "施設の新規登録", new_room_path %>
-          <%= link_to "予約済み一覧", reservations_path %>
-          <%= link_to "登録済み一覧", rooms_path %>
-          <%= link_to "アカウント設定", users_show_path %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          <li class="menu-item drop-menu">
+            <input type="checkbox" id="submenu-toggle-2">
+            <label for="submenu-toggle-2"><%= current_user.name %></label>
+            <ul class="submenu">
+             <li class="submenu-item"><%= link_to "施設の新規登録", new_room_path %></li>
+             <li class="submenu-item"><%= link_to "予約済み一覧", reservations_path %></li>
+             <li class="submenu-item"><%= link_to "登録済み一覧", rooms_path %></li>
+             <li class="submenu-item"><%= link_to "アカウント設定", users_show_path %></li>
+             <li class="submenu-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+            <ul/>
+          </li>
+        </ul>
+      </div>
     <% else %>
+      <h4><%= link_to "Potepan Share", root_path %></h4>
           <%= link_to "新規登録", new_user_registration_path %>
           <%= link_to "ログイン", new_user_session_path %>
     <% end %>

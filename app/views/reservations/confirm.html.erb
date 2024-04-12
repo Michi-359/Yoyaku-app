@@ -10,18 +10,13 @@
 <%= form_with(url:reservations_path, method: :post) do |f| %>
   <table>
     <tr>
-      <th><%= f.label :checkin ,"チェックイン" %></th>
+      <th><%= f.label :checkin ,"チェックイン日" %></th>
       <td><%= l @reservation.checkin %></td>
     </tr>
 
     <tr>
-      <th><%= f.label :checkin ,"チェックアウト" %></th>
+      <th><%= f.label :checkin ,"チェックアウト日" %></th>
       <td><%= l @reservation.checkout %></td>
-    </tr>
-
-    <tr>
-      <th><%= f.label :person ,"人数" %></th>
-      <td><%= @reservation.person %>名</td>
     </tr>
 
     <tr>
@@ -30,10 +25,14 @@
     </tr>
 
     <tr>
+      <th><%= f.label :person ,"人数" %></th>
+      <td><%= @reservation.person %>名</td>
+    </tr>
+
+    <tr>
       <th><%= f.label :total_price ,"合計金額" %></th>
       <td>¥<%= @reservation.total_price %></td>
     </tr>
-
 
   </table>
 
