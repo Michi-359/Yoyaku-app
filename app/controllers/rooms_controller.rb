@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
+
   def index
     @rooms = Room.where(user_id:current_user.id)
     @user = current_user

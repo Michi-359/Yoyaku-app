@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @reservations = Reservation.where(user_id:current_user.id)
     @rooms = Room.all
@@ -15,13 +17,10 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(reservation_params)
     @user = current_user
     @room = Room.where(id: @reservation.room_id)
-    binding.pry
     if @reservation.invalid?
-      binding.pry
       flash[:notice_no_create] = "バリデーションエラーがあります"
       redirect_to controller: :rooms, action: :show, id: @reservation.room_id
     else
-      binding.pry
       @reservation.many_days = ( @reservation.checkout - @reservation.checkin )
       @reservation.total_price = @reservation.room.room_price * @reservation.person * @reservation.many_days
     end
@@ -31,13 +30,10 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(reservation_params)
     @user = current_user
     @room = Room.where(id: @reservation.room_id)
-    binding.pry
     if @reservation.save
-      binding.pry
       flash[:notice_create] = "予約情報を登録しました"
       redirect_to :reservations
     else
-      binding.pry
       flash[:notice_no_create] = "予約情報の登録に失敗しました"
       redirect_back(fallback_location: root_path)
     end
@@ -73,13 +69,10 @@ class ReservationsController < ApplicationController
   def update
     @reservation = Reservation.find(params[:id])
     @user = current_user
-    binding.pry
     if @reservation.update(reservation_params)
-      binding.pry
       flash[:notice_update] = "予約情報を更新しました"
       redirect_to :reservations
     else
-      binding.pry
       flash[:notice_no_update] = "予約情報を更新できませんでした"
       render "edit"
     end
