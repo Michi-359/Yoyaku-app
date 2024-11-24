@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <h2>部屋を予約する</h2>
-    <%= form_with(url:confirm_reservations_path, method: :get) do |f| %>
-     <table>
+  <%= form_with(url:confirm_reservations_path, method: :get) do |f| %>
+    <table>
       <%= f.hidden_field :user_id, value: @user.id %>
       <%= f.hidden_field :room_id, value: @room.id %>
       <tr>
@@ -18,17 +18,17 @@
         <th><%= f.label :person ,"人数" %></th>
         <td><%= f.text_field :person %></td>
       </tr>
-     </table>
+    </table>
 
-     <% if flash[:notice_no_create] %>
-        <p class="notice"><%= flash[:notice_no_create] %></p>
-     <% end %>
-     <div>
+    <% if flash[:notice_no_create] %>
+      <p class="notice"><%= flash[:notice_no_create] %></p>
+    <% end %>
+    <div>
       <ul>
         <li><%= f.submit "予約する"%></li>
       </ul>
-     </div>
-    <% end %>
+    </div>
+  <% end %>
 <% else %>
   <%= link_to "ログイン", new_user_session_path %> 
 <% end %>

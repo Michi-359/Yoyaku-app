@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @reservations = Reservation.where(user_id:current_user.id)
+    @reservations = Reservation.where(user_id: current_user.id)
     @rooms = Room.all
     @user = current_user
   end
@@ -21,7 +21,7 @@ class ReservationsController < ApplicationController
       flash[:notice_no_create] = "バリデーションエラーがあります"
       redirect_to controller: :rooms, action: :show, id: @reservation.room_id
     else
-      @reservation.many_days = ( @reservation.checkout - @reservation.checkin )
+      @reservation.many_days = (@reservation.checkout - @reservation.checkin)
       @reservation.total_price = @reservation.room.room_price * @reservation.person * @reservation.many_days
     end
   end
@@ -61,7 +61,7 @@ class ReservationsController < ApplicationController
       flash[:notice_no_create] = "バリデーションエラーがあります"
       redirect_to controller: :rooms, action: :show, id: @reservation.room_id
     else
-      @reservation.many_days = ( @reservation.checkout - @reservation.checkin )
+      @reservation.many_days = (@reservation.checkout - @reservation.checkin)
       @reservation.total_price = @reservation.room.room_price * @reservation.person * @reservation.many_days
     end
   end
@@ -86,7 +86,8 @@ class ReservationsController < ApplicationController
   end
 
   private
-  def reservation_params  # プライベートメソッド 
+
+  def reservation_params
     params.permit(:checkin, :checkout, :person, :room_price, :total_price, :user_id, :room_id)
   end
 end

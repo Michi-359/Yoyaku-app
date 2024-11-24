@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
 
   def index
-    @rooms = Room.where(user_id:current_user.id)
+    @rooms = Room.where(user_id: current_user.id)
     @user = current_user
   end
 
@@ -57,7 +57,8 @@ class RoomsController < ApplicationController
   end
 
   private
-  def room_params  # プライベートメソッド 
+
+  def room_params
     params.require(:room).permit(:room_name, :room_content, :room_price, :room_address, :room_image, :user_id, :room_id)
   end
 end
