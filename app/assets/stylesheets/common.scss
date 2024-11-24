@@ -1,0 +1,71 @@
+.icon_image {
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    object-fit: cover;
+}
+
+.room_image {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    object-fit: cover;
+}
+
+.dropdown {
+  display: right;
+  justify-content: center; /* メニューアイテムを中央揃えに */
+}
+
+.dropdown input[type="checkbox"] {
+  display: none;
+}
+
+.dropdown label {
+  cursor: pointer;
+}
+
+.dropdown .submenu {
+  display: none;
+}
+
+.dropdown input[type="checkbox"]:checked + label + .submenu {
+  display: block;
+}
+
+
+a{
+  color:#333;
+  text-decoration:none;
+}
+a:hover{
+  color:#fff;
+  background-color:#2F4858;
+}
+.dropdown label{
+  position:relative;
+  display:inline-block;
+  padding:10px 26px 10px 10px;
+  background-color:#336699;
+  &:hover{
+    color:#fff;
+    background-color:#2F4858;
+  }
+    &::after{
+    content:"\f107";
+    font-family: FontAwesome;
+    display: inline-block;
+    margin-right:5px;
+    position: absolute;
+    right:10px;
+    top:50%;
+    transform: translateY(-50%);
+    font-size:11px;
+  }
+}
+.submenu{
+  margin:8px 0 0;
+  padding:10px;
+  border:1px solid #2F4858;
+  list-style:none;
+}

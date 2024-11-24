@@ -1,0 +1,44 @@
+<%= render "shared/partial" %>
+
+<h3>再予約</h3>
+
+<% if @room.find(@reservation.room_id).room_image.present? %>
+  <img src=<%= @room.find(@reservation.room_id).room_image %> class = "room_image">
+<% else %>
+  <img src="/assets/default-room_image-icon.png" class = "room_image">
+<% end %>
+
+<%= form_with(url:edit_confirm_reservation_path(@reservation), method: :get) do |f| %>
+  <table>
+    <tr>
+      <th><%= f.label :checkin ,"チェックイン日" %></th>
+      <td><%= f.date_field :checkin, value: @reservation.checkin %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :checkout ,"チェックアウト日" %></th>
+      <td><%= f.date_field :checkout, value: @reservation.checkout %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :person ,"人数" %></th>
+      <td><%= f.text_field :person, value: @reservation.person %></td>
+    </tr>
+      <%= f.hidden_field :user_id, value: @user.id %>
+      <%= f.hidden_field :room_id, value: @reservation.room_id %>
+  </table>
+  <% if flash[:notice_no_create] %>
+    <p class="notice"><%= flash[:notice_no_create] %></p>
+  <% end %>
+  <div>
+    <ul>
+      <li><%= f.submit "再予約"%></li>
+      <li><%= link_to "キャンセル", :reservations %></li>
+    </ul>
+  </div>
+
+  <% if flash[:notice_no_update] %>
+    <p class="notice"><%= flash[:notice_no_update] %></p>
+  <% end %>
+  <%= render "shared/error", obj: @reservation %> 
+  <% end %>

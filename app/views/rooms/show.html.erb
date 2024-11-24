@@ -1,0 +1,34 @@
+<%= render "shared/partial" %>
+<%= link_to '戻る', :back %>
+<% if @room.user == current_user %>
+ <%= link_to "編集", edit_room_path(@room.id) %>
+<% else %>
+ <td></td>
+<% end %>
+<table>
+  <% if @room.room_image.present? %>
+      <img src=<%= @room.room_image %> class = "room_image">
+  <% else %>
+      <img src="/assets/default-room_image-icon.png" class = "room_image">
+  <% end %>
+
+  <tr>
+    <th>施設名</th>
+    <td><%= @room.room_name %></td>
+  </tr>
+  <tr>
+    <th>紹介文</th>
+    <td><%= @room.room_content %></td>
+  </tr>
+  <tr>
+    <th>住所</th>
+    <td><%= @room.room_address %></td>
+  </tr>
+  <tr>
+    <th>宿泊料金（/日）</th>
+    <td><%= @room.room_price %></td>
+  </tr>
+</table>
+
+<%= render "shared/reservation" %>
+

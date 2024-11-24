@@ -1,0 +1,45 @@
+<%= render "shared/partial" %>
+
+<h3>施設の編集</h3>
+
+<%= form_with model: @room do |f| %>
+<table>
+    <tr>
+      <th><%= f.label :room_name ,"施設名" %></th>
+      <td><%= f.text_field :room_name %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :room_content ,"施設詳細" %></th>
+      <td><%= f.text_field :room_content %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :room_price ,"料金" %></th>
+      <td><%= f.text_field :room_price %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :room_address ,"住所" %></th>
+      <td><%= f.text_field :room_address %></td>
+    </tr>
+    
+    <tr>
+      <th><%= f.label :room_image ,"施設画像"  %></th>
+      <td><%= f.file_field :room_image %></td>
+    </tr>
+
+  </table>
+
+  <div>
+    <ul>
+      <li><%= f.submit "編集を完了する"%></li>
+      <%= link_to '戻る', :back %>
+    </ul>
+  </div>
+
+ <% if flash[:notice_no_update] %>
+   <p class="notice"><%= flash[:notice_no_update] %></p>
+ <% end %>
+ <%= render "shared/error", obj: @room %> 
+<% end %>

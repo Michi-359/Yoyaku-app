@@ -1,0 +1,55 @@
+<div style="display: flex;justify-content: space-between">
+<%= render "shared/partial" %>
+<h3>予約済み一覧</h3>
+</div>
+
+<div>
+<table>
+  <thead>
+    <tr>
+      <th>施設画像</th>
+      <th>施設名</th>
+      <th>紹介文</th>
+      <th>合計料金</th>
+      <th>チェックイン日</th>
+      <th>チェックアウト日</th>
+      <th>予約確定日時</th>
+      <th>編集</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reservations.each do |f| %>
+      <tr>
+        <td>
+         <% if @rooms.find(f.room_id).room_image.present? %>
+          <img src=<%= @rooms.find(f.room_id).room_image %> class = "room_image">
+         <% else %>
+          <img src="/assets/default-room_image-icon.png" class = "room_image">
+         <% end %>
+        </td>
+        <td><%= link_to "#{@rooms.find(f.room_id).room_name}", @rooms.find(f.room_id) %></td>
+        <td><%= @rooms.find(f.room_id).room_content %></td>
+        <td><%= f.total_price %>円</td>
+        <td><%= f.checkin %></td>
+        <td><%= f.checkout %></td>
+        <td><%= l f.updated_at, format: :time %></td>
+        <td><%= link_to "再予約", [:edit, f] %></td>
+        <td><%= link_to "削除", f, method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+ <% if flash[:notice_create] %>
+   <p class="notice"><%= flash[:notice_create] %></p>
+ <% end %>
+ <% if flash[:notice_update] %>
+   <p class="notice"><%= flash[:notice_update] %></p>
+ <% end %>
+ <% if flash[:notice_destroy] %>
+   <p class="notice"><%= flash[:notice_destroy] %></p>
+ <% end %>
+
+</div>

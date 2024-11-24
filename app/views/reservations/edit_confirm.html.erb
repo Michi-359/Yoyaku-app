@@ -1,0 +1,60 @@
+<%= render "shared/partial" %>
+
+<h3>予約内容の確認</h3>
+
+<% if @room.find(@reservation.room_id).room_image.present? %>
+  <img src=<%= @room.find(@reservation.room_id).room_image %> class = "room_image">
+<% else %>
+  <img src="/assets/default-room_image-icon.png" class = "room_image">
+<% end %>
+
+<%= form_with(url:reservation_path, method: :patch) do |f| %>
+   <table>
+    <tr>
+      <th><%= f.label :checkin ,"チェックイン日" %></th>
+      <td><%= l @reservation.checkin %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :checkin ,"チェックアウト日" %></th>
+      <td><%= l @reservation.checkout %></td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :many_days ,"宿泊日数" %></th>
+      <td><%= @reservation.many_days %>日</td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :person ,"人数" %></th>
+      <td><%= @reservation.person %>名</td>
+    </tr>
+
+    <tr>
+      <th><%= f.label :total_price ,"合計金額" %></th>
+      <td>¥<%= @reservation.total_price %></td>
+    </tr>
+    
+   </table>
+
+   <%= f.hidden_field :checkin ,value: @reservation.checkin %>
+   <%= f.hidden_field :checkout ,value: @reservation.checkout %>
+   <%= f.hidden_field :person ,value: @reservation.person %>
+   <%= f.hidden_field :many_days ,value: @reservation.many_days %>
+   <%= f.hidden_field :total_price ,value: @reservation.total_price %>
+   <%= f.hidden_field :user_id, value: @user.id %>
+   <%= f.hidden_field :room_id, value: @reservation.room_id %>
+
+   <% if flash[:notice_no_create] %>
+    <p class="notice"><%= flash[:notice_no_create] %></p>
+   <% end %>
+
+   <div>
+    <ul>
+      <li><%= f.submit "予約" %></li>
+      <li><%= link_to "キャンセル", :reservations %></li>
+    </ul>
+   </div>
+
+   <%= render "shared/error", obj: @reservation %> 
+<% end %>
